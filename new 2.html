@@ -1,0 +1,455 @@
+<!DOCTYPE html><html lang="en" data-id="0geqbjqx" data-line="1-455"><head data-id="mrsyqlq6" data-line="1-103">
+  <meta charset="UTF-8" data-id="qm5kdwvg" data-line="2-2">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" data-id="w9mp6lvd" data-line="3-3">
+  <script src="https://cdn.tailwindcss.com" data-id="srq49k3j" data-line="4-4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" data-id="wps0jji9" data-line="5-5">
+  <title data-id="k9n7hdz3" data-line="6-6">Little Miami Brewing Company</title>
+  <style data-id="38y8myse" data-line="7-102">
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #000000;
+      color: #FFFFFF;
+    }
+    .hero-slide {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      transition: background-image 1s ease-in-out;
+    }
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+    }
+    .slide-container {
+      position: relative;
+      overflow: hidden;
+    }
+    .slide-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+    .slide-nav {
+      position: absolute;
+      bottom: 2rem;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+    .slide-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .slide-dot.active {
+      background-color: #46B0E3;
+      transform: scale(1.2);
+    }
+    .slide-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 1rem;
+      cursor: pointer;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+    }
+    .slide-btn.prev {
+      left: 1rem;
+    }
+    .slide-btn.next {
+      right: 1rem;
+    }
+    .btn-primary {
+      background-color: #46B0E3;
+      color: white;
+      font-weight: bold;
+      padding: 0.75rem 2rem;
+      border-radius: 9999px;
+      transition: background-color 0.3s ease;
+    }
+    .btn-primary:hover {
+      background-color: #3a9dcc;
+    }
+    .nav-hidden {
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+    .nav-visible {
+      transform: translateY(0);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body data-id="1w6arep5" data-line="104-455">
+  <!-- Navigation -->
+  <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-70 transition-transform duration-300" data-id="c953w1gq" data-line="106-151">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-id="fxqtajc9" data-line="107-138">
+      <div class="flex justify-between h-24 items-center" data-id="s4aqoj5l" data-line="108-137">
+        <div class="flex-shrink-0 flex items-center" data-id="vihms7on" data-line="109-111">
+          <img class="h-16 w-auto" src="https://images.unsplash.com/photo-1695606453524-523a606f0293?crop=entropy&amp;cs=srgb&amp;fm=jpg&amp;ixid=M3w3MzY5OTh8MHwxfHNlYXJjaHwzfHxicmV3ZXJ5JTIwbG9nb3xlbnwwfHx8fDE3NDY3ODUzNDV8MA&amp;ixlib=rb-4.1.0&amp;q=85" alt="brewery logo" loading="lazy" data-id="3p4emxi7" data-line="110-110">
+        </div>
+        <div class="hidden md:ml-6 md:flex md:space-x-8" data-id="way04tn5" data-line="112-119">
+          <a href="#" class="text-white hover:text-blue-400 inline-flex items-center px-1 pt-1 text-lg font-medium" data-id="epq6fog6" data-line="113-113">Home</a>
+          <a href="#" class="text-white hover:text-blue-400 inline-flex items-center px-1 pt-1 text-lg font-medium" data-id="srrc1ss7" data-line="114-114">Beers</a>
+          <a href="#" class="text-white hover:text-blue-400 inline-flex items-center px-1 pt-1 text-lg font-medium" data-id="4clugnk3" data-line="115-115">Food</a>
+          <a href="#" class="text-white hover:text-blue-400 inline-flex items-center px-1 pt-1 text-lg font-medium" data-id="f3cad19q" data-line="116-116">Events</a>
+          <a href="#" class="text-white hover:text-blue-400 inline-flex items-center px-1 pt-1 text-lg font-medium" data-id="t5zxk374" data-line="117-117">About</a>
+          <a href="#" class="text-white hover:text-blue-400 inline-flex items-center px-1 pt-1 text-lg font-medium" data-id="qekaagoo" data-line="118-118">Contact</a>
+        </div>
+        <div class="hidden md:ml-4 md:flex md:items-center space-x-4" data-id="ewywbsc0" data-line="120-130">
+          <a href="#" class="text-white hover:text-blue-400" data-id="ubx6hxb1" data-line="121-123">
+            <i class="fab fa-facebook-f" data-id="pbn5zdoc" data-line="122-122"></i>
+          </a>
+          <a href="#" class="text-white hover:text-blue-400" data-id="iog8x6yh" data-line="124-126">
+            <i class="fab fa-instagram" data-id="cm4mhtca" data-line="125-125"></i>
+          </a>
+          <a href="#" class="text-white hover:text-blue-400" data-id="tz9osz2p" data-line="127-129">
+            <i class="fab fa-twitter" data-id="0d80n06n" data-line="128-128"></i>
+          </a>
+        </div>
+        <div class="-mr-2 flex items-center md:hidden" data-id="nfeqq2ee" data-line="131-136">
+          <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-blue-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false" data-id="28mckvqk" data-line="132-135">
+            <span class="sr-only" data-id="ta0ldp8s" data-line="133-133">Open main menu</span>
+            <i class="fas fa-bars" data-id="wck7imsm" data-line="134-134"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="md:hidden hidden" id="mobile-menu" data-id="fmjlk1l8" data-line="141-150">
+      <div class="pt-2 pb-3 space-y-1 bg-black px-4" data-id="3p31g570" data-line="142-149">
+        <a href="#" class="block px-3 py-2 text-base font-medium text-white hover:text-blue-400" data-id="76b188mx" data-line="143-143">Home</a>
+        <a href="#" class="block px-3 py-2 text-base font-medium text-white hover:text-blue-400" data-id="nd1qhuz2" data-line="144-144">Beers</a>
+        <a href="#" class="block px-3 py-2 text-base font-medium text-white hover:text-blue-400" data-id="dcz2m0o3" data-line="145-145">Food</a>
+        <a href="#" class="block px-3 py-2 text-base font-medium text-white hover:text-blue-400" data-id="j398a4kr" data-line="146-146">Events</a>
+        <a href="#" class="block px-3 py-2 text-base font-medium text-white hover:text-blue-400" data-id="mif2pfmt" data-line="147-147">About</a>
+        <a href="#" class="block px-3 py-2 text-base font-medium text-white hover:text-blue-400" data-id="bx8tbut0" data-line="148-148">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Slider -->
+  <div class="relative slide-container" id="heroSlider" data-id="7h34olwo" data-line="154-172">
+    <div class="hero-slide" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1974&amp;q=80')" data-id="kwcsbwl1" data-line="155-164">
+      <div class="slide-content" data-id="cvwihukj" data-line="156-163">
+        <div data-id="snli4a6w" data-line="157-162">
+          <h1 class="text-4xl md:text-6xl font-bold text-white mb-6" data-id="w1rkkz17" data-line="158-158">CINCINNATI BREWERY, PIZZA, &amp; EVENT CENTER</h1>
+          <div class="flex flex-col sm:flex-row justify-center gap-4" data-id="n7950vkr" data-line="159-161">
+            <a href="#" class="btn-primary" data-id="rhva0tt7" data-line="160-160">VISIT US</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="slide-btn prev" onclick="prevSlide()" data-id="8464jpkc" data-line="165-165"><i class="fas fa-chevron-left" data-id="7zi279ft" data-line="165-165"></i></button>
+    <button class="slide-btn next" onclick="nextSlide()" data-id="gndrfdkh" data-line="166-166"><i class="fas fa-chevron-right" data-id="9l6erj5f" data-line="166-166"></i></button>
+    <div class="slide-nav" data-id="feqlyaws" data-line="167-171">
+      <div class="slide-dot active" onclick="goToSlide(0)" data-id="qld64hya" data-line="168-168"></div>
+      <div class="slide-dot" onclick="goToSlide(1)" data-id="7n0ue1d3" data-line="169-169"></div>
+      <div class="slide-dot" onclick="goToSlide(2)" data-id="jd1s3kpc" data-line="170-170"></div>
+    </div>
+  </div>
+
+  <!-- Taproom Section -->
+  <section class="py-20" data-id="8s65no0h" data-line="175-188">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-id="78545saw" data-line="176-187">
+      <div class="grid md:grid-cols-2 gap-8 items-center" data-id="zpcmf6ls" data-line="177-186">
+        <div data-id="hcbsxu1v" data-line="178-180">
+          <img class="w-full h-auto rounded-lg" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1974&amp;q=80" alt="taproom interior" data-id="g0nwip3z" data-line="179-179">
+        </div>
+        <div data-id="xwezbach" data-line="181-185">
+          <h2 class="text-3xl font-bold mb-6" data-id="mdvjlhrq" data-line="182-182">Our Taproom</h2>
+          <p class="text-gray-300 mb-8" data-id="pahdngt7" data-line="183-183">Experience our handcrafted beers in a welcoming space designed for relaxation and enjoyment. Our taproom features rotating selections of our finest brews, comfortable seating, and a vibrant atmosphere perfect for gatherings with friends.</p>
+          <a href="#" class="btn-primary inline-block" data-id="4f4c8bt2" data-line="184-184">Visit Our Taproom</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Section -->
+  <section class="py-20 bg-gray-900" data-id="26w2jidr" data-line="191-224">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-id="00hpstff" data-line="192-223">
+      <h2 class="text-3xl font-bold mb-12 text-center" data-id="2vfn7qpe" data-line="193-193">Upcoming Events</h2>
+      <div class="grid md:grid-cols-3 gap-8" data-id="4egdmkfw" data-line="194-222">
+        <div class="bg-gray-800 rounded-lg overflow-hidden" data-id="3k0zcspw" data-line="195-203">
+          <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80" alt="live music" data-id="wypifhvz" data-line="196-196">
+          <div class="p-6" data-id="cqo2s591" data-line="197-202">
+            <h3 class="text-xl font-semibold mb-2" data-id="6ep7jl4x" data-line="198-198">Live Music Night</h3>
+            <p class="text-gray-400 mb-4" data-id="hly2v62i" data-line="199-199">June 15, 2025 at 7:00 PM</p>
+            <p class="text-gray-300 mb-4" data-id="vdwjxb8m" data-line="200-200">Join us for an evening of great music and craft beer featuring local bands.</p>
+            <a href="#" class="btn-primary inline-block" data-id="9x8zzbfb" data-line="201-201">Learn More</a>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-lg overflow-hidden" data-id="mxuxmlgb" data-line="204-212">
+          <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1974&amp;q=80" alt="beer tasting" data-id="m1hvyz2s" data-line="205-205">
+          <div class="p-6" data-id="5fhudpwk" data-line="206-211">
+            <h3 class="text-xl font-semibold mb-2" data-id="zpl3u0zj" data-line="207-207">Beer Tasting Event</h3>
+            <p class="text-gray-400 mb-4" data-id="qbm0fbrv" data-line="208-208">June 22, 2025 at 6:00 PM</p>
+            <p class="text-gray-300 mb-4" data-id="vbbfy9b8" data-line="209-209">Sample our newest releases and limited edition brews with our brewmaster.</p>
+            <a href="#" class="btn-primary inline-block" data-id="dku6jwkf" data-line="210-210">Learn More</a>
+          </div>
+        </div>
+        <div class="bg-gray-800 rounded-lg overflow-hidden" data-id="z0qox0nc" data-line="213-221">
+          <img class="w-full h-48 object-cover" src="https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=2046&amp;q=80" alt="pizza night" data-id="ldyoh84i" data-line="214-214">
+          <div class="p-6" data-id="heuhathj" data-line="215-220">
+            <h3 class="text-xl font-semibold mb-2" data-id="au02evpn" data-line="216-216">Pizza &amp; Beer Pairing</h3>
+            <p class="text-gray-400 mb-4" data-id="mc2kgqx6" data-line="217-217">June 29, 2025 at 5:00 PM</p>
+            <p class="text-gray-300 mb-4" data-id="gooeyh58" data-line="218-218">Discover the perfect combinations of our artisan pizzas and craft beers.</p>
+            <a href="#" class="btn-primary inline-block" data-id="cv0s5gt4" data-line="219-219">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20" data-id="fajlzxff" data-line="227-269">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-id="l56fyo9d" data-line="228-268">
+      <h2 class="text-3xl font-bold mb-12 text-center" data-id="edmm5k3c" data-line="229-229">What Our Clients Say</h2>
+      <div class="grid md:grid-cols-3 gap-8" data-id="g5x0b178" data-line="230-267">
+        <div class="testimonial-card p-8 rounded-lg" data-id="k2a9azc0" data-line="231-242">
+          <div class="flex mb-4" data-id="ohmhcykt" data-line="232-238">
+            <i class="fas fa-star text-yellow-400" data-id="ojk7fr5b" data-line="233-233"></i>
+            <i class="fas fa-star text-yellow-400" data-id="wjlkxvzg" data-line="234-234"></i>
+            <i class="fas fa-star text-yellow-400" data-id="xbc2txx5" data-line="235-235"></i>
+            <i class="fas fa-star text-yellow-400" data-id="g3hq5lx9" data-line="236-236"></i>
+            <i class="fas fa-star text-yellow-400" data-id="a2zlk6qv" data-line="237-237"></i>
+          </div>
+          <p class="mb-4" data-id="l37e2rxo" data-line="239-239">"Amazing beer and even better pizza! The rooftop view is spectacular."</p>
+          <p class="font-semibold" data-id="wq27ngwm" data-line="240-240">John D.</p>
+          <p class="text-gray-400 text-sm" data-id="c38bf646" data-line="241-241">May 15, 2025</p>
+        </div>
+        <div class="testimonial-card p-8 rounded-lg" data-id="qt4xrrt4" data-line="243-254">
+          <div class="flex mb-4" data-id="7hygs044" data-line="244-250">
+            <i class="fas fa-star text-yellow-400" data-id="mpo71ptj" data-line="245-245"></i>
+            <i class="fas fa-star text-yellow-400" data-id="11qbgufa" data-line="246-246"></i>
+            <i class="fas fa-star text-yellow-400" data-id="2e7okbbv" data-line="247-247"></i>
+            <i class="fas fa-star text-yellow-400" data-id="l84u99n5" data-line="248-248"></i>
+            <i class="fas fa-star text-yellow-400" data-id="3j3337am" data-line="249-249"></i>
+          </div>
+          <p class="mb-4" data-id="qpmpa5da" data-line="251-251">"Hosted my company party here and it was perfect. Great service and atmosphere!"</p>
+          <p class="font-semibold" data-id="q73v6va3" data-line="252-252">Sarah M.</p>
+          <p class="text-gray-400 text-sm" data-id="kl7jrij5" data-line="253-253">April 28, 2025</p>
+        </div>
+        <div class="testimonial-card p-8 rounded-lg" data-id="n0p7n6fz" data-line="255-266">
+          <div class="flex mb-4" data-id="5fbs4t5u" data-line="256-262">
+            <i class="fas fa-star text-yellow-400" data-id="szaiv9xq" data-line="257-257"></i>
+            <i class="fas fa-star text-yellow-400" data-id="q00xofff" data-line="258-258"></i>
+            <i class="fas fa-star text-yellow-400" data-id="k1ni1yp5" data-line="259-259"></i>
+            <i class="fas fa-star text-yellow-400" data-id="xgw4e71p" data-line="260-260"></i>
+            <i class="fas fa-star-half-alt text-yellow-400" data-id="jg2xwux5" data-line="261-261"></i>
+          </div>
+          <p class="mb-4" data-id="nxxmvhsg" data-line="263-263">"The Trail IPA is my new favorite beer. Can't wait to come back!"</p>
+          <p class="font-semibold" data-id="lfexjjnz" data-line="264-264">Mike T.</p>
+          <p class="text-gray-400 text-sm" data-id="wq8d85nu" data-line="265-265">March 10, 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="py-20 bg-gray-900" data-id="dww1s2ii" data-line="272-292">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-id="saxm98xv" data-line="273-291">
+      <h2 class="text-3xl font-bold mb-8 text-center" data-id="kwa32tvx" data-line="274-274">Our Location</h2>
+      <div class="grid md:grid-cols-2 gap-8" data-id="0lptex9c" data-line="275-290">
+        <div data-id="o5ds8xj9" data-line="276-278">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3082.354628918938!2d-84.29098192401851!3d39.43273237171116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8840541b12ee0c1d%3A0x3e5b1b6d1b6d1b6d!2s208%20Mill%20St%2C%20Milford%2C%20OH%2045150%2C%20USA!5e0!3m2!1sen!2s!4v1683038400000!5m2!1sen!2s" class="w-full h-96 border-0" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" data-id="be4omi0v" data-line="277-277"></iframe>
+        </div>
+        <div class="flex flex-col justify-center" data-id="f9w22esj" data-line="279-289">
+          <h3 class="text-2xl font-semibold mb-4" data-id="vwbii7z2" data-line="280-280">Little Miami Brewing Company</h3>
+          <p class="mb-4" data-id="1p958l7p" data-line="281-281">208 Mill Street, Milford, OH 45150</p>
+          <p class="mb-4" data-id="vpsi01lq" data-line="282-282">(513) 555-7890</p>
+          <p class="mb-6" data-id="2n15b643" data-line="283-283"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="aec7c0c8c1eec2c7dadac2cbc3c7cfc3c7ccdccbd9c7c0c980cdc1c3">[email&#160;protected]</a></p>
+          <h4 class="text-xl font-semibold mb-2" data-id="nxpugtvp" data-line="284-284">Hours</h4>
+          <p class="mb-2" data-id="zlnwhyxt" data-line="285-285"><strong data-id="t0ytdlvj" data-line="285-285">Mon-Thu:</strong> 3-9 PM</p>
+          <p class="mb-2" data-id="grujwz1s" data-line="286-286"><strong data-id="xpobj51r" data-line="286-286">Fri-Sat:</strong> 12-11 PM</p>
+          <p class="mb-6" data-id="5b0h5nwe" data-line="287-287"><strong data-id="f7nig74m" data-line="287-287">Sun:</strong> 12-8 PM</p>
+          <a href="#" class="btn-primary w-fit" data-id="3v2cqnu3" data-line="288-288">Get Directions</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="py-20" style="background-color: #46B0E3;" data-id="wgazux8f" data-line="295-306">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-id="spo9sffc" data-line="296-305">
+      <h2 class="text-3xl font-bold mb-4" data-id="88sj1jcc" data-line="297-297">Join Our Newsletter</h2>
+      <p class="text-xl mb-8" data-id="fird9wj8" data-line="298-298">Stay updated on new beer releases, events, and special promotions.</p>
+      <form class="max-w-xl mx-auto" data-id="2nm6tin7" data-line="299-304">
+        <div class="flex flex-col sm:flex-row gap-4" data-id="eaw08wti" data-line="300-303">
+          <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-white" data-id="p7crnqs0" data-line="301-301">
+          <button type="submit" class="bg-black hover:bg-gray-800 text-white font-bold px-6 py-3 rounded-full transition duration-300" data-id="gjz9vz33" data-line="302-302">Subscribe</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black py-12" data-id="wow24psk" data-line="309-350">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" data-id="cmtbro6q" data-line="310-349">
+      <div class="grid md:grid-cols-4 gap-12" data-id="6iwswfxu" data-line="311-345">
+        <div data-id="4e6i3k1z" data-line="312-326">
+          <img class="h-16 w-auto mb-6" src="https://images.unsplash.com/photo-1695606453524-523a606f0293?crop=entropy&amp;cs=srgb&amp;fm=jpg&amp;ixid=M3w3MzY5OTh8MHwxfHNlYXJjaHwzfHxicmV3ZXJ5JTIwbG9nb3xlbnwwfHx8fDE3NDY3ODUzNDV8MA&amp;ixlib=rb-4.1.0&amp;q=85" alt="brewery logo" loading="lazy" data-id="8936o6xm" data-line="313-313">
+          <p class="text-gray-400 mb-6" data-id="0ecj04lp" data-line="314-314">Crafting exceptional beer along the Little Miami River since 2015.</p>
+          <div class="flex space-x-4" data-id="thf83epp" data-line="315-325">
+            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-id="2g0rtcem" data-line="316-318">
+              <i class="fab fa-facebook-f" data-id="vr4uz8ev" data-line="317-317"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-id="yb87rqw3" data-line="319-321">
+              <i class="fab fa-instagram" data-id="2xrilqx5" data-line="320-320"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition duration-300" data-id="oaafu0dj" data-line="322-324">
+              <i class="fab fa-twitter" data-id="o3m88hzb" data-line="323-323"></i>
+            </a>
+          </div>
+        </div>
+        <div data-id="qoanmyaf" data-line="327-335">
+          <h3 class="text-lg font-semibold text-white mb-4" data-id="l342x4c1" data-line="328-328">Quick Links</h3>
+          <ul class="text-gray-400 space-y-2" data-id="3l1xvot2" data-line="329-334">
+            <li data-id="vkza8nsr" data-line="330-330"><a href="#" class="hover:text-white transition duration-300" data-id="w8hlqpxk" data-line="330-330">Home</a></li>
+            <li data-id="zyctzqu5" data-line="331-331"><a href="#" class="hover:text-white transition duration-300" data-id="kon4rtb3" data-line="331-331">Our Beers</a></li>
+            <li data-id="zxggzyth" data-line="332-332"><a href="#" class="hover:text-white transition duration-300" data-id="ejlr6by8" data-line="332-332">Food Menu</a></li>
+            <li data-id="r8r6o1bn" data-line="333-333"><a href="#" class="hover:text-white transition duration-300" data-id="zqrekc6o" data-line="333-333">Events</a></li>
+          </ul>
+        </div>
+        <div data-id="e12ykcg1" data-line="336-344">
+          <h3 class="text-lg font-semibold text-white mb-4" data-id="gq1stf3j" data-line="337-337">Contact</h3>
+          <address class="not-italic text-gray-400" data-id="b0eyiu43" data-line="338-343">
+            <p class="mb-2" data-id="i4ie4yfu" data-line="339-339">208 Mill Street</p>
+            <p class="mb-2" data-id="yqoi00ev" data-line="340-340">Milford, OH 45150</p>
+            <p class="mb-2" data-id="q7pt0nnb" data-line="341-341">(513) 555-7890</p>
+            <p data-id="rw2osk0i" data-line="342-342"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cfa6a1a9a08fa3a6bbbba3aaa2a6aea2a6adbdaab8a6a1a8e1aca0a2">[email&#160;protected]</a></p>
+          </address>
+        </div>
+      </div>
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400" data-id="uxh5bx2m" data-line="346-348">
+        <p data-id="jygqpopf" data-line="347-347">© 2025 Little Miami Brewing Company. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-id="j1oy26cv" data-line="352-453">
+    // Mobile menu toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuButton = document.querySelector('[aria-controls="mobile-menu"]');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      mobileMenuButton.addEventListener('click', function() {
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      // Hide navigation initially
+      const nav = document.getElementById('mainNav');
+      nav.classList.add('nav-hidden');
+      
+      // Show navigation when scrolling starts
+      let lastScroll = 0;
+      window.addEventListener('scroll', function() {
+        const currentScroll = window.pageYOffset;
+        
+        if (currentScroll <= 0) {
+          nav.classList.add('nav-hidden');
+          return;
+        }
+        
+        nav.classList.remove('nav-hidden');
+        nav.classList.add('nav-visible');
+        
+        lastScroll = currentScroll;
+      });
+    });
+
+    // Slider functionality
+    const sliders = {
+      heroSlider: {
+        currentSlide: 0,
+        slides: [
+          {
+            image: "https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+            title: "CINCINNATI BREWERY, PIZZA, & EVENT CENTER",
+            button: "VISIT US"
+          },
+          {
+            image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+            title: "ARTISAN PIZZAS & CRAFT BEER",
+            button: "VIEW MENU"
+          },
+          {
+            image: "https://images.unsplash.com/photo-1516458460442-a1281e2e1b4f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+            title: "BOOK YOUR NEXT EVENT WITH US",
+            button: "LEARN MORE"
+          }
+        ]
+      }
+    };
+
+    function changeSlide(sliderId, direction = 1) {
+      const slider = sliders[sliderId];
+      slider.currentSlide = (slider.currentSlide + direction + slider.slides.length) % slider.slides.length;
+      updateSlider(sliderId);
+    }
+
+    function goToSlide(sliderId, index) {
+      const slider = sliders[sliderId];
+      slider.currentSlide = index;
+      updateSlider(sliderId);
+    }
+
+    function nextSlide(sliderId = 'heroSlider') {
+      changeSlide(sliderId, 1);
+    }
+
+    function prevSlide(sliderId = 'heroSlider') {
+      changeSlide(sliderId, -1);
+    }
+
+    function updateSlider(sliderId) {
+      const slider = sliders[sliderId];
+      const container = document.getElementById(sliderId);
+      
+      if (sliderId === 'heroSlider') {
+        const heroSlide = container.querySelector('.hero-slide');
+        const heroTitle = container.querySelector('h1');
+        const heroButton = container.querySelector('a');
+        
+        heroSlide.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${slider.slides[slider.currentSlide].image}')`;
+        heroTitle.textContent = slider.slides[slider.currentSlide].title;
+        heroButton.textContent = slider.slides[slider.currentSlide].button;
+      }
+      
+      // Update dots
+      const dots = container.querySelectorAll('.slide-dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === slider.currentSlide);
+      });
+    }
+
+    // Initialize hero slider
+    updateSlider('heroSlider');
+    setInterval(() => changeSlide('heroSlider', 1), 5000);
+  </script>
+
+</body></html>
